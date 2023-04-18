@@ -1,0 +1,16 @@
+import tkinter
+from time import strftime
+
+relogio = tkinter.Label()
+relogio.pack()
+relogio['font'] = 'OpenSans 100 italic'
+relogio['text'] = strftime ('%H:%M:%S')
+
+def hora_atual():
+    agora = strftime ('%H:%M:%S')
+    if agora != relogio['text']:
+        relogio['text'] = agora
+    relogio.after(100, hora_atual)
+
+hora_atual()
+relogio.mainloop()
