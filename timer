@@ -1,0 +1,67 @@
+from tkinter import *
+import time
+
+janela = Tk()
+janela.geometry('420x320')
+janela.resizable(False, False)
+
+janela.config(bg='gray74')
+
+hrs = StringVar()
+Entry(janela, textvariable=hrs, width=2, font='Arial 30').place(x=134, y=120)
+hrs.set('00')
+
+mins = StringVar()
+Entry(janela, textvariable=mins, width=2, font='Arial 30').place(x=180, y=120)
+mins.set('00')
+
+sec = StringVar()
+Entry(janela, textvariable=sec, width=2, font='Arial 30').place(x=228, y=120)
+sec.set('00')
+
+timer_active = False
+timer_id = None
+
+def start_timer():
+    global timer_active
+    global timer_id
+    if not timer_active:
+        timer_active = True
+        tempo = int(hrs.get()) * 3600 + int(mins.get()) * 60 + int(sec.get())
+        while tempo > -1 and timer_active:
+            minute, second = divmod(tempo, 60)
+            hour, minute = divmod(minute, 60)
+            sec.set(f"{second:02d}")
+            hrs.set(f"{hour:02d}")
+            mins.set(f"{minute:02d}")
+
+            janela.update()
+            time.sleep(1)
+
+            if tempo == 0:
+                sec.set('00')
+                mins.set('00')
+                hrs.set('00')
+
+            tempo -= 1
+        timer_active = False
+
+def pause_timer():
+    global timer_active
+    timer_active = False
+
+def stop_timer():
+    global timer_active
+    global timer_id
+    timer_active = False
+    janela.after_cancel(timer_id)
+    sec.set('00')
+    mins.set('00')
+    hrs.set('00')
+
+Label(janela, font=('Arial bold', 38), text='Relógio', bg='ForestGreen').place(x=118, y=54)
+Button(janela, text='Iniciar', bd='2', bg='firebrick3', font=('Arial bold', 18), command=start_timer).place(x=167, y=172)
+Button(janela, text='Pausar', bd='2', bg='firebrick3', font=('Arial bold', 18), command=pause_timer).place(x=160, y=220)
+Button(janela, text='Zerar', bd='2', bg='firebrick3', font=('Arial bold', 18), command=stop_timer).place(x=169, y=268)
+
+janela.mainloop()
