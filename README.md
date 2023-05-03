@@ -1,3 +1,3 @@
 # projects
-personal portfolio with all my personal projects
+personal portfolio with all my projects
 
