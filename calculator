@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+
+print('input the 1st number: ')
+n1 = input()
+
+print('input the math symbol: ')
+sinal = input ()
+
+print('input the 2nd number: ')
+n2 = input()
+
+if symbol== '+':
+    op = n1+n2
+
+elif symbol == "-":
+    op = n1 - n2
+ 
+elif symbol == "/":
+    op = n1 + n2
+ 
+elif symbol == "*":
+    op = n1 * n2
+ 
+else:
+    print("Wrong symbol.")
+ 
+print(op)
